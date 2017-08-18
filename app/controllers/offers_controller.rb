@@ -1,5 +1,6 @@
 class OffersController < ApplicationController
   def new
+    @offer = Offer.new
   end
 
   def create
@@ -14,7 +15,7 @@ class OffersController < ApplicationController
   end
 
   def index
-    @offers = Offer.filter_technologies(params[:search]).decorate
+    @offers = Offer.includes(:currency, :technologies, :skills_requirements, :company).filter_technologies(params[:search]).decorate
 
   end
 
